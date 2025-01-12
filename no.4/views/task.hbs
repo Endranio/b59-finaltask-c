@@ -1,0 +1,39 @@
+{{#> layout}}
+<style>
+ 
+
+    </style>
+
+<div class="container mt-5">
+    <!-- Task Section -->
+    <div class="card p-4 task-section">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="task-title">Work</h5>
+            <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+        </div>
+
+        <!-- Task Input -->
+        <div class="input-group mb-3">
+            <button class="btn btn-primary add-task-btn">Add a task</button>
+        </div>
+
+        <!-- Task List -->
+        <ul class="list-group task-list">
+            <li class="list-group-item d-flex justify-content-between align-items-center task-item">
+                <span>Input data student</span>
+                <input type="checkbox" class="form-check-input">
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center task-item">
+                <span>Review Content</span>
+                <input type="checkbox" class="form-check-input">
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center task-item">
+                <span>Research Content</span>
+                <input type="checkbox" class="form-check-input">
+            </li>
+        </ul>
+    </div>
+</div>
+
+{{/layout}}
