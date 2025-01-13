@@ -1,24 +1,40 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
-  class collections extends Model {
+  class Collection extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // Relasi ke User
+      Collection.belongsTo(models.User, {
+        foreignKey: "user_id",
+        as: "user",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+
+      // Relasi ke Task
+      Collection.hasMany(models.Task, {
+        foreignKey: "collections_id",
+        as: "tasks", // Alias untuk relasi
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
   }
-  collections.init({
-    name: DataTypes.STRING,
-    user_id: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'collections',
-  });
-  return collections;
+  Collection.init(
+    {
+      name: DataTypes.STRING,
+      user_id: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "Collection",
+    }
+  ); 
+  return Collection;
 };

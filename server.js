@@ -14,8 +14,8 @@ const {
   renderAddCollections,
   addCollections,
   authRegister,
-  authlogin,
   deleteCollections,
+  authLogin,
 } = require("./no.4/controllers/controllers");
 
 app.set("view engine", "hbs");
@@ -43,8 +43,9 @@ app.get("/add-collections", renderAddCollections);
 
 app.post("/register", authRegister);
 app.post("/add-collections", addCollections);
-app.post("/login", authlogin);
+app.post("/login", authLogin);
 app.delete("/collections-delete/:id",deleteCollections)
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

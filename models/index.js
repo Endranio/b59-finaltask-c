@@ -30,9 +30,10 @@ fs
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
-
+  console.log("Models loaded:", Object.keys(db))
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
+    console.log(`Associating model: ${modelName}`)
     db[modelName].associate(db);
   }
 });
