@@ -15,9 +15,6 @@ module.exports = {
       is_done: {
         type: Sequelize.BOOLEAN
       },
-      collections_id: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
