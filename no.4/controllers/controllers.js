@@ -142,7 +142,7 @@ function authLogout(req, res) {
   res.redirect("/login");
 }
 
-module.exports = { 
+module.exports = {       
   renderRegister,
   renderLogin,
   renderTask,
