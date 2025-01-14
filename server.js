@@ -38,7 +38,7 @@ hbs.registerPartials(__dirname + "/no.4/views/partials", function (err) {});
 app.get("/", renderRegister);
 app.get("/login", renderLogin);
 app.get("/collections", renderCollections);
-app.get("/task", renderTask);
+app.get("/task/:id", renderTask);
 app.get("/add-collections", renderAddCollections);
 
 app.post("/register", authRegister);

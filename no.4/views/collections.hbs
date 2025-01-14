@@ -5,15 +5,19 @@
 
     <div class="flex-card">
         {{#each collections}}
-        <div class="card">
+        <div id="${i}" class="card">
             <div class="header">
 
             <i class="fa-solid fa-list-check"></i>
             </div>
-            <p>school</p>
+            <p><a href="/task/{{this.id}}">{{this.name}}</a>
+            </p>
             <div class="bottom">
             <p>2/9 done</p>
             <i class="fa-solid fa-clock"></i>
+             <form action="/collections-delete/{{this.id}}?_method=DELETE" method="post">
+            <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+        </form>
             </div>
         </div>
         {{/each}}

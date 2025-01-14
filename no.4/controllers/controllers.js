@@ -47,20 +47,37 @@ async function authLogin(req, res) {
 
 async function renderCollections(req, res) {
   const { user } = req.session;
-
+console.log("ini user:",user)
   
   const collections = await Collection.findAll({
     include: {
       model: User,
-      as: "user", 
+      as: "User", 
+      attributes: { exclude: ["password"]}
     },
   });
 
   res.render("collections",{user,collections});
 }
 
-function renderTask(req, res) {
-  res.render("task");
+async function renderTask(req, res) {
+
+  let { user } = req.session;
+  const { id } = req.params;
+
+  const task = await Collection.findOne({
+    include: {
+      model: User,
+      as: "User",
+      attributes: { exclude: ["password"] },
+    },
+    where: {
+      id, 
+    },
+  });
+
+  console.log("task:",task)
+  res.render("task",{data:task, user});
 }
 
 function renderAddCollections(req, res) {
@@ -69,25 +86,30 @@ function renderAddCollections(req, res) {
 
 async function addCollections(req, res) {
   console.log("form submitted");
+  let{user} = req.session
   const { name } = req.body;
   console.log("ini body:", req.body);
 
   const result = await Collection.create({
     name,
+    user_id:user.id
   });
-  console.log("test result:", result);
 
-  res.redirect("/collections"); // Pastikan rute diarahkan dengan benar
+  console.log("test result:", result); 
+
+  res.redirect("/collections");
 }
 
 async function deleteCollections(req, res) {
   const { id } = req.params;
+  // const {user} =req.session
   const result = await Collection.destroy({
-    where: { id },
+    where: { id
+     },
   });
-
   console.log("result deleted:", result);
-  res.redirect("/collections"); // Pastikan setelah hapus mengarah kembali ke halaman collections
+
+  res.redirect("/collections"); 
 }
 
 module.exports = {
