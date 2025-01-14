@@ -100,19 +100,28 @@ async function addCollections(req, res) {
 
 async function addTask(req, res) {
   console.log("form submitted");
-  let{user} = req.session
-  const {id} = req.params
+  const{user} = req.session
+  
   const { name } = req.body;
   console.log("ini body:", req.body);
 
+const collection = await Collection.findOne({
+  where: {
+    user_id: user.id, 
+   
+  },
+});
+
+
   const tasks = await Task.create({
     name,
-    collection_id:id
+    is_done:false,
+    collections_id:collection.id
   });
 
   console.log("test result:", tasks,user); 
 
-  res.redirect("/task");
+  res.redirect(`/task/${collection.id}`);
 }
 
 async function deleteCollections(req, res) {

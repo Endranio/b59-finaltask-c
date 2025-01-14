@@ -17,6 +17,7 @@ module.exports = {
       },
       collections_id: {
         type: Sequelize.INTEGER,
+        allowNull:false,
         references: {
           model: 'Collections', 
           key: 'id'
