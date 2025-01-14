@@ -47,7 +47,6 @@ async function authLogin(req, res) {
 
 async function renderCollections(req, res) {
   const { user } = req.session;
-console.log("ini user:",user)
   
   const collections = await Collection.findAll({
     include: {
@@ -56,7 +55,7 @@ console.log("ini user:",user)
       attributes: { exclude: ["password"]}
     },
   });
-
+console.log("Collection render:", collections);
   res.render("collections",{user,collections});
 }
 
@@ -65,19 +64,16 @@ async function renderTask(req, res) {
   let { user } = req.session;
   const { id } = req.params;
 
-  const task = await Collection.findOne({
+  const task = await Task.findAll({
     include: {
-      model: User,
-      as: "User",
-      attributes: { exclude: ["password"] },
-    },
-    where: {
-      id, 
+      model: Collection,
+      as: "Collection",
+      
     },
   });
 
-  console.log("task:",task)
-  res.render("task",{data:task, user});
+  console.log("Collection with tasks:", task);
+  res.render("task",{task, user,});
 }
 
 function renderAddCollections(req, res) {
@@ -95,9 +91,28 @@ async function addCollections(req, res) {
     user_id:user.id
   });
 
-  console.log("test result:", result); 
+
+  console.log("test result collections:", result); 
 
   res.redirect("/collections");
+}
+
+
+async function addTask(req, res) {
+  console.log("form submitted");
+  let{user} = req.session
+  const {id} = req.params
+  const { name } = req.body;
+  console.log("ini body:", req.body);
+
+  const tasks = await Task.create({
+    name,
+    collection_id:id
+  });
+
+  console.log("test result:", tasks,user); 
+
+  res.redirect("/task");
 }
 
 async function deleteCollections(req, res) {
@@ -122,4 +137,5 @@ module.exports = {
   authRegister,
   authLogin, 
   deleteCollections,
-};
+  addTask
+}

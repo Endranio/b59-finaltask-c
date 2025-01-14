@@ -16,6 +16,7 @@ const {
   authRegister,
   deleteCollections,
   authLogin,
+  addTask,
 } = require("./no.4/controllers/controllers");
 
 app.set("view engine", "hbs");
@@ -44,6 +45,7 @@ app.get("/add-collections", renderAddCollections);
 app.post("/register", authRegister);
 app.post("/add-collections", addCollections);
 app.post("/login", authLogin);
+app.post("/add-task/:id",addTask)
 app.delete("/collections-delete/:id",deleteCollections)
 
 
