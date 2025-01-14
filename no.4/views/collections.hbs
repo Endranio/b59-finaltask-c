@@ -1,29 +1,36 @@
 {{#> layout}}
 
-<main>
-    <h1>Collections</h1>
+<main class="container py-4">
+    <h1 class="text-center mb-4">Collections</h1>
 
-    <div class="flex-card">
+    <div class="row">
         {{#each collections}}
-        <div id="${i}" class="card">
-            <div class="header">
-
-            <i class="fa-solid fa-list-check"></i>
-            </div>
-            <p><a href="/task/{{this.id}}">{{this.name}}</a>
-            </p>
-            <div class="bottom">
-            <p>2/9 done</p>
-            <i class="fa-solid fa-clock"></i>
-             <form action="/collections-delete/{{this.id}}?_method=DELETE" method="post">
-            <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-        </form>
+        <div class="col-md-3 mb-4">
+            <div class="card shadow border-0" style="background-color: #2b2f42; color: #ffffff;">
+                <div class="card-header text-center" style="background-color: #3b4261; color: #ffffff;">
+                    <i class="fa-solid fa-list-check fa-2x"></i>
+                </div>
+                <div class="card-body text-center">
+                    <p class="card-text font-weight-bold">
+                        <a href="/task/{{this.id}}" class="text-light text-decoration-none">{{this.name}}</a>
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center" style="background-color: #444b6e; color: #ffffff;">
+                    <p class="mb-0">2/9 done</p>
+                    <i class="fa-solid fa-clock text-light"></i>
+                </div>
+                <form action="/collections-delete/{{this.id}}?_method=DELETE" method="post" class="text-center mt-2">
+                    <button class="btn btn-danger btn-sm w-75">Delete</button>
+                </form>
             </div>
         </div>
         {{/each}}
 
-    <div class="add"><a href="/add-collections">+</a></div>
+        <div class="col-md-3 mb-4 d-flex align-items-center justify-content-center">
+            <a href="/add-collections" class="btn btn-primary btn-lg rounded-circle shadow" style="width: 80px; height: 80px; background-color: #3b4261; color: #ffffff; border: none;">+</a>
+        </div>
     </div>
 </main>
+
 
 {{/layout}}

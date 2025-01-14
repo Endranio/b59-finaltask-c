@@ -13,22 +13,20 @@
     <form action="/login" method="post">
        <h1>Login</h1> 
 
-    <div>
+    <div class="mb-3">
         <label for="email">Email</label>
-        <input type="email"  class="form-control" name="email" id="email" placeholder="Examle@gmail.com">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Example@gmail.com" required>
     </div>
-    <div>
+    <div class="mb-3">
         <label for="password">Password</label>
-        <input type="password"  class="form-control" name="password" id="password" placeholder="Min 6 characters">
+        <input type="password" class="form-control" name="password" id="password" placeholder="Min 6 characters" required>
     </div>
-    <div class="d-grid gap-2 col-6 mx-auto">
-
-    <button type="submit" class="btn btn-light btn-sm"> Login </button>
-</div>
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-light btn-sm">Login</button>
+    </div>
     </form>
-      <p>Don,t have account <a href="/">Register</a></p>
+      <p>Don't have an account? <a href="/">Register</a></p>
 </section>  
- 
  <script src="../../../assets/JS/bootstrap.bundle.min.js"></script>
 </body>
 </html>

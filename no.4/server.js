@@ -17,10 +17,11 @@ const {
   deleteCollections,
   authLogin,
   addTask,
-} = require("./no.4/controllers/controllers");
+  authLogout,
+} = require("./controllers/controllers");
 
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "./no.4/views"));
+app.set("views", path.join(__dirname, "/views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
@@ -34,13 +35,14 @@ app.use(
   })
 );
 
-hbs.registerPartials(__dirname + "/no.4/views/partials", function (err) {});
+hbs.registerPartials(__dirname + "/views/partials", function (err) {});
 
 app.get("/", renderRegister);
 app.get("/login", renderLogin);
 app.get("/collections", renderCollections);
 app.get("/task/:id", renderTask);
 app.get("/add-collections", renderAddCollections);
+app.get("/logout",authLogout)
 
 app.post("/register", authRegister);
 app.post("/add-collections", addCollections);

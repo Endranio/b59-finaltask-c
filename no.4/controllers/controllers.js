@@ -1,6 +1,6 @@
-const { User, Collection, Task } = require("../../models"); // Gunakan nama model dengan huruf kapital
+const { User, Collection, Task } = require("../models"); // Gunakan nama model dengan huruf kapital
 const bcrypt = require("bcrypt");
-const config = require("../../config/config.json");
+const config = require("../config/config.json");
 const saltRound = 10;
 
 function renderRegister(req, res) {
@@ -126,7 +126,7 @@ const collection = await Collection.findOne({
 
 async function deleteCollections(req, res) {
   const { id } = req.params;
-  // const {user} =req.session
+  const {user} =req.session
   const result = await Collection.destroy({
     where: { id
      },
@@ -136,7 +136,13 @@ async function deleteCollections(req, res) {
   res.redirect("/collections"); 
 }
 
-module.exports = {
+function authLogout(req, res) {
+  req.session.user = null;
+
+  res.redirect("/login");
+}
+
+module.exports = { 
   renderRegister,
   renderLogin,
   renderTask,
@@ -146,5 +152,6 @@ module.exports = {
   authRegister,
   authLogin, 
   deleteCollections,
-  addTask
+  addTask,
+  authLogout
 }
